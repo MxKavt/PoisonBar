@@ -1,0 +1,13 @@
+{% extends 'user_base.html' %}
+{% block content %}
+    <body style="font-size: 30px">
+    HERE'S THE DRINK DETAILS:
+    <br>
+    <div style="font-size: 20px; color: yellow">
+            ID: {{ item.id }}<br>
+            Item: {{ item.name }}<br>
+            Ingredients: {{ item.ingredients }}<br><br>
+    </div>
+    </body>
+
+{% endblock %}

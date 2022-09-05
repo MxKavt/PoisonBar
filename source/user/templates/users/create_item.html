@@ -1,0 +1,30 @@
+{% extends 'user_base.html' %}
+{% block content %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <form method="POST" class ="mainText">
+        <fieldset class="mainBorder" style="height: 650px">
+            <legend style="font-size: 40px">Create Drink</legend>
+            <br>
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}
+            <br>
+            {{ form.name }}
+            <br>
+            {{ form.ingredients.label }}
+            <br>
+            {{ form.ingredients }}
+
+            <br>
+            <div style="font-size: 15px;">
+            {{ form.submit(class="button")}}
+            </div>
+        </fieldset>
+    </form>
+    <br><br>
+{% endblock %}

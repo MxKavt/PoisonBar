@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form class="mainText">
+    <fieldset class="mainBorder" style="height: 750px">
+        <legend style="font-size: 40px">Discover</legend><br />
+        <label style="font-size: 35px">What's the vibe you're looking for?
+        <input type="radio" name="atmosphere" value="cyberpunk"/>Cyberpunk
+        <input type="radio" name="atmosphere" value="vintage"/>Vintage
+        <input type="radio" name="atmosphere" value="contemporary"/>Contemporary
+        <input type="radio" name="atmosphere" value="bohemian"/>Bohemian
+        <input type="radio" name="atmosphere" value="industrial"/>Industrial
+        <input type="radio" name="atmosphere" value="art deco"/>Art Deco
+        <input type="radio" name="atmosphere" value="dive bar"/>Dive Bar
+        </label>
+        <br/><br/>
+        <div class="drop_options">
+            <label style="font-size: 30px; text-align: center">Noise Level<br />
+                <select class="options" style="font-size: 25px;" name="accountType">
+                    <option>Barely Audible</option>
+                    <option>Mid</option>
+                    <option>Super High</option>
+                </select>
+            </label>
+        </div>
+
+    </fieldset>
+</form>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'user_base.html' %}
+{% block content %}
+<body>
+    <form method="POST" class ="mainText">
+        <fieldset class="mainBorder" style="height: 630px">
+            <legend style="font-size: 40px">UPDATE DRINK</legend>
+            THIS IS THE ITEM YOU'RE UPDATING <br>
+            ID: {{ item.id }}<br>
+            Name: {{ item.name }}<br>
+            Ingredients: {{ item.ingredients }}<br><br>
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}
+            <br>
+            {{ form.name }}
+            <br>
+            {{ form.ingredients.label }}
+            <br>
+            {{ form.ingredients }}
+            <br>
+            <br><br>
+            <div style="font-size: 15px;">
+            {{ form.submit(class="button")}}
+            </div>
+        </fieldset>
+    </form>
+</body>
+{% endblock %}

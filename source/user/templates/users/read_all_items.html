@@ -1,0 +1,30 @@
+{% extends 'user_base.html' %}
+{% block content %}
+    <body style="font-size: 30px">
+        <form method="POST" class ="mainText">
+            <fieldset class="mainBorder" style="height: 250px">
+                <legend style="font-size: 40px">GET DRINK DATA</legend>
+                <br>
+                {{ form.hidden_tag() }}
+                {{ form.id.label }}
+                <br>
+                {{ form.id }}
+                <br>
+                <div style="font-size: 15px;">
+                {{ form.submit(class="button")}}
+                </div>
+            </fieldset>
+        </form>
+    HERE'S THE LIST OF OUR DRINKS:
+    <br>
+    <div style="font-size: 20px; color: yellow">
+        {% for item in all_items %}
+            ID: {{ item.id }}<br>
+            Name: {{ item.name }}<br>
+            Creator: {{ item.creator }}<br>
+            Ingredients: {{ item.ingredients }}<br><br>
+        {% endfor %}
+    </div>
+    </body>
+
+{% endblock %}

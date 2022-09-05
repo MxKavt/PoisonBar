@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <body style="font-size: 30px">
+    HERE'S THE LIST OF OUR CREATORS:
+    <br>
+    <div style="font-size: 20px; color: yellow">
+        {% for creator in all_creators %}
+            ID: {{ user.id }}<br>
+            Creator: {{ creator.name }}<br>
+            Email: {{ creator.email }}<br>
+            Drinks: {{ creator.drinks }}<br><br>
+        {% endfor %}
+    </div>
+    </body>
+
+{% endblock %}
