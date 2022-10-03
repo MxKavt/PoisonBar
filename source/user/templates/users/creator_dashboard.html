@@ -33,10 +33,10 @@
         <div class="drop_options">
             <button class="options_btn">Actions</button>
             <div class="options_content">
-            <a class="options" href='#'>Create Your Collections</a>
-            <a class="options" href='#'>List Collections</a>
-            <a class="options" href='#'>Update Collections</a>
-            <a class="options" href='#'>Delete Collections</a>
+            <a class="options" href={{ url_for('user.create_drinks') }}>Create Your Drink</a>
+            <a class="options" href={{ url_for('user.read_drinks') }}>List Drinks</a>
+            <a class="options" href={{ url_for('user.update_drinks') }}>Update Drinks</a>
+            <a class="options" href={{ url_for('user.delete_drinks') }}>Delete Drinks</a>
             </div>
         </div>
         <div class="drop_options">

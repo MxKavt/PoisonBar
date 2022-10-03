@@ -14,15 +14,14 @@ class User(BaseModel, UserMixin):
     email = db.Column(db.String(48))
     password = db.Column(db.String(48))
     experience = db.Column(db.String(24))
-    account_type = db.Column(db.String(24))
-    role = db.relationship('Role', secondary='user_roles', backref=db.backref('user', lazy='dynamic'))
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
 
-    def __init__(self, username, email, password_hash, experience, account_type):
+    def __init__(self, username, email, password_hash, experience, role_id):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password_hash)
         self.experience = experience
-        self.account_type = account_type
+        self.role_id = role_id
 
     def __repr__(self):
         return f"User: {self.username}"
@@ -35,7 +34,6 @@ class User(BaseModel, UserMixin):
         email = cls.query.filter_by(email=temp_email).first()
         if email:
             return email
-
 
     def is_admin(self):
         return self.role == "admin"
@@ -54,18 +52,10 @@ class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True)
+    users = db.relationship('User', backref='role', lazy=True)
 
     def __repr__(self):
         return self.name
-
-
-class UserRoles(db.Model):
-
-    __tablename__ = 'user_roles'
-
-    id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
 
 class Item(BaseModel):

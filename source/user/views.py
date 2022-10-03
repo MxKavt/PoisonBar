@@ -8,10 +8,6 @@ user_blueprint = Blueprint('user',
                            __name__,
                            template_folder='templates/users')
 
-# item_blueprint = Blueprint('item',
-#                            __name__,
-#                            template_folder='templates/items')
-
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -22,7 +18,7 @@ def register():
                     email=form.email.data,
                     password_hash=form.password.data,
                     experience=form.experience.data,
-                    account_type=form.account_type.data)
+                    role_id=form.account_type.data)
         user.create(commit=True)
         return redirect(url_for('user.login'))
     return render_template("register.html", form=form)
@@ -58,8 +54,14 @@ def discover_manual():
 @user_blueprint.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    return render_template('user_dashboard.html')\
-
+    if current_user.role_id == 1:
+        return redirect('/admin')
+    if current_user.role_id == 2:
+        return render_template('user_dashboard.html')
+    if current_user.role_id == 3:
+        return render_template('creator_dashboard.html')
+    if current_user.role_id == 4:
+        return render_template('venue_dashboard.html')
 
 
 @user_blueprint.route('/logout', methods=['GET', 'POST'])
@@ -132,11 +134,11 @@ def delete_drinks():
 
 @user_blueprint.route('/read_creators', methods=['GET', 'POST'])
 def read_creators():
-    all_creators = Creator.read_all()
+    all_creators = User.query.filter_by(role_id=3)
     return render_template('read_all_creators.html', all_creators=all_creators)
 
 
 @user_blueprint.route('/read_venues', methods=['GET', 'POST'])
 def read_venues():
-    all_venues = Venue.read_all()
+    all_venues = User.query.filter_by(role_id=4)
     return render_template('read_all_venues.html', all_venues=all_venues)

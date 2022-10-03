@@ -5,8 +5,8 @@
     <br>
     <div style="font-size: 20px; color: yellow">
         {% for creator in all_creators %}
-            ID: {{ user.id }}<br>
-            Creator: {{ creator.name }}<br>
+            ID: {{ creator.id }}<br>
+            Creator: {{ creator.username }}<br>
             Email: {{ creator.email }}<br>
             Drinks: {{ creator.drinks }}<br><br>
         {% endfor %}

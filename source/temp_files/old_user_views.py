@@ -61,7 +61,7 @@ def update_user(id):
         user.update(username=username,
                     email=email,
                     experience=experience,
-                    account_type=account_type,
+                    role_id=account_type,
                     commit=True)
         return redirect(url_for('user.read_all'))
     return render_template('update.html', user=user, form=form)

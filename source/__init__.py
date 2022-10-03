@@ -1,7 +1,7 @@
 from flask import Flask
 from source.extensions import db, migrate, login_manager, admin
 from flask_admin.menu import MenuLink
-from source.user.models import User, Role, UserRoles, Item, ItemUsers
+from source.user.models import User, Role, Item, ItemUsers
 from source.admin_resources.admin_funcs import UserView, RoleView, UserRoleView, ItemView, ItemUsersView
 
 
@@ -22,7 +22,6 @@ def register_extensions(app):
     admin.init_app(app)
     admin.add_view(UserView(User, db.session, category="Management", endpoint="users_"))
     admin.add_view(RoleView(Role, db.session, category="Management", endpoint="roles_"))
-    admin.add_view(UserRoleView(UserRoles, db.session, category="Management", endpoint="user_roles_"))
     admin.add_view(ItemView(Item, db.session, category="Management", endpoint="item_"))
     admin.add_view(ItemUsersView(ItemUsers, db.session, category="Management", endpoint="item_users_"))
     admin.add_link(MenuLink(name='Return to Home', url='/', ))

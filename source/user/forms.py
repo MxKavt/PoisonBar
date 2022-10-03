@@ -11,7 +11,7 @@ class BaseForm(FlaskForm):
     password = PasswordField(label="Password")
     confirm_password = PasswordField(label="Confirm Password", validators=[EqualTo('password', message="Passwords don't match")])
     experience = RadioField(choices=[("beginner", "Beginner"), ("some experience", "Some Experience"), ("veteran", "Veteran")])
-    account_type = SelectField(choices=[("regular", "Regular"), ("creator", "Creator"), ("venue", "Venue")])
+    account_type = SelectField(choices=[(2, "Regular"), (3, "Creator"), (4, "Venue")])
     submit = SubmitField()
 
     def validate_email_from_db(self):

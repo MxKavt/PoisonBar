@@ -3,8 +3,8 @@ from flask_user import current_user
 
 
 class UserView(ModelView):
-    def is_accessible(self):
-        return current_user.has_roles('Admin')
+    # def is_accessible(self):
+    #     return current_user.has_roles('Admin')
 
     can_create = False
     can_delete = True
@@ -12,13 +12,13 @@ class UserView(ModelView):
     can_export = True
     column_exclude_list = ['password', ]
     column_searchable_list = ['username', 'email', ]
-    column_filters = ['account_type', 'experience', 'role']
-    column_editable_list = ['username', 'email', 'experience', 'account_type', 'role', ]
+    column_filters = ['role_id', 'experience', 'role']
+    column_editable_list = ['username', 'email', 'experience', 'role_id', 'role', ]
 
 
 class RoleView(ModelView):
-    def is_accessible(self):
-        return current_user.has_roles('Admin')
+    # def is_accessible(self):
+    #     return current_user.has_roles('Admin')
 
     can_create = True
     can_delete = True
@@ -29,8 +29,8 @@ class RoleView(ModelView):
 
 
 class UserRoleView(ModelView):
-    def is_accessible(self):
-        return current_user.has_roles('Admin')
+    # def is_accessible(self):
+    #     return current_user.has_roles('Admin')
     can_create = True
     can_delete = True
     can_edit = True
@@ -41,8 +41,8 @@ class UserRoleView(ModelView):
 
 
 class ItemView(ModelView):
-    def is_accessible(self):
-        return current_user.has_roles('Admin')
+    # def is_accessible(self):
+    #     return current_user.has_roles('Admin')
 
     can_create = True
     can_delete = True
@@ -53,8 +53,8 @@ class ItemView(ModelView):
 
 
 class ItemUsersView(ModelView):
-    def is_accessible(self):
-        return current_user.has_roles('Admin')
+    # def is_accessible(self):
+    #     return current_user.has_roles('Admin')
 
     can_create = True
     can_delete = True
