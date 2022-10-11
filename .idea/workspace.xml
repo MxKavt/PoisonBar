@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f79b638d-5424-44a3-92ce-4ad26d89f63f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/8b5c4a1a5205_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/admin_resources/admin_funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/admin_resources/admin_funcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/database.sqlite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/user/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/user/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/user/templates/users/creator_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/source/user/templates/users/creator_dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/user/templates/users/delete_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/source/user/templates/users/delete_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +133,8 @@
       <workItem from="1665436859938" duration="121000" />
       <workItem from="1665436992829" duration="2455000" />
       <workItem from="1665439480670" duration="2951000" />
-      <workItem from="1665470255253" duration="594000" />
+      <workItem from="1665470255253" duration="2660000" />
+      <workItem from="1665495524433" duration="31000" />
     </task>
     <servers />
   </component>
