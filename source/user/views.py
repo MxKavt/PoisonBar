@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from source.user.forms import BaseForm, LoginForm, GetItem, ItemForm, DiscoverManual
-from source.user.models import User, Item, ItemUsers, Creator, Venue
+from source.user.models import User, Item
 from flask_login import login_user, login_required, logout_user, current_user
 
 
@@ -77,12 +77,12 @@ def create_drinks():
     if form.validate_on_submit():
         item = Item(name=form.name.data,
                     ingredients=form.ingredients.data,
-                    creator=current_user.username)
+                    creator=current_user.username,
+                    creator_id=current_user.id)
         item.create(commit=True)
-        item_user = ItemUsers(item_id=item.id,
-                              creator_id=current_user.get_id())
-        item_user.create(commit=True)
-        return redirect(url_for('user.read_drinks'))
+        # user = User.find_by_email(current_user.email)
+        # print(user.drinks)
+        return redirect(url_for('user.your_drinks'))
     return render_template("create_item.html", form=form)
 
 
@@ -97,13 +97,33 @@ def read_drinks():
     return render_template('read_all_items.html', form=form, all_items=all_items)
 
 
+@user_blueprint.route('/your_drinks', methods=['GET', 'POST'])
+def your_drinks():
+    form = GetItem()
+    user = User.find_by_email(current_user.email)
+    drinks = user.all_drinks(user.id)
+    print(type(drinks))
+    # creators = user.all_creators(3)
+    if form.validate_on_submit():
+        for e in drinks:
+            if form.id.data == e.id:
+                item = Item.read_one(form.id.data)
+                return render_template('read_one_item.html', item=item)
+            else:
+                render_template('read_all_items.html', form=form, all_items=drinks)
+    return render_template('read_all_items.html', form=form, all_items=drinks)
+
+
 @user_blueprint.route('/update_drinks', methods=['GET', 'POST'])
 def update_drinks():
-    get_form = GetItem()
-    all_items = Item.read_all()
-    if get_form.validate_on_submit():
-        return redirect(url_for('user.update_drink_data', id=get_form.id.data))
-    return render_template('get_item.html', all_items=all_items, form=get_form)
+    form = GetItem()
+    user = User.find_by_email(current_user.email)
+    drinks = user.all_drinks(user.id)
+    if form.validate_on_submit():
+        for e in drinks:
+            if form.id.data == e.id:
+                return redirect(url_for('user.update_drink_data', id=form.id.data))
+    return render_template('get_item.html', all_items=drinks, form=form)
 
 
 @user_blueprint.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -116,20 +136,22 @@ def update_drink_data(id):
         item.update(name=name,
                     ingredients=ingredients,
                     commit=True)
-        return redirect(url_for('user.read_drinks'))
+        return redirect(url_for('user.your_drinks'))
     return render_template('update_item.html', item=item, form=form)
 
 
 @user_blueprint.route('/delete_drinks', methods=['GET', 'POST'])
 def delete_drinks():
     form = GetItem()
-    all_items = Item.read_all()
+    user = User.find_by_email(current_user.email)
+    drinks = user.all_drinks(user.id)
     if form.validate_on_submit():
-        item_id = form.id.data
-        item = Item.query.get(item_id)
-        item.delete()
-        return redirect(url_for('user.read_drinks'))
-    return render_template('get_item.html', all_items=all_items, form=form)
+        for e in drinks:
+            if form.id.data == e.id:
+                item = Item.query.get(form.id.data)
+                item.delete()
+                return redirect(url_for('user.your_drinks'))
+    return render_template('delete_item.html', all_items=drinks, form=form)
 
 
 @user_blueprint.route('/read_creators', methods=['GET', 'POST'])

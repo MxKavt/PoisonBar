@@ -52,14 +52,14 @@ class ItemView(ModelView):
     column_searchable_list = ['id', 'name', 'creator']
 
 
-class ItemUsersView(ModelView):
-    # def is_accessible(self):
-    #     return current_user.has_roles('Admin')
-
-    can_create = True
-    can_delete = True
-    can_edit = False
-    can_export = True
-    column_list = ('id', 'creator_id', 'item_id')
-    column_searchable_list = ['id', 'creator_id', 'item_id']
+# class ItemUsersView(ModelView):
+#     # def is_accessible(self):
+#     #     return current_user.has_roles('Admin')
+#
+#     can_create = True
+#     can_delete = True
+#     can_edit = False
+#     can_export = True
+#     column_list = ('id', 'creator_id', 'item_id')
+#     column_searchable_list = ['id', 'creator_id', 'item_id']
 

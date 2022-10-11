@@ -1,16 +1,10 @@
 {% extends 'user_base.html' %}
 {% block content %}
-    <div style="font-size: 20px; color: yellow">
-    CURRENT LIST OF ITEMS
-        {% for item in all_items %}
-            ID: {{ item.id }}<br>
-            Name: {{ item.name }}<br>
-        {% endfor %}
-    </div>
+
     <body style="font-size: 30px">
         <form method="POST" class ="mainText">
             <fieldset class="mainBorder" style="height: 250px">
-                <legend style="font-size: 40px">DELETE DRINK</legend>
+                <legend style="font-size: 40px">PICK ITEM TO DELETE</legend>
                 <br>
                 {{ form.hidden_tag() }}
                 {{ form.id.label }}
@@ -23,4 +17,13 @@
             </fieldset>
         </form>
     </body>
+    <div style="font-size: 30px">
+        CURRENT LIST OF ITEMS
+    </div>
+    <div style="font-size: 20px; color: yellow">
+        {% for item in all_items %}
+            ID: {{ item.id }}<br>
+            Name: {{ item.name }}<br>
+        {% endfor %}
+    </div>
 {% endblock %}

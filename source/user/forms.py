@@ -27,7 +27,7 @@ class LoginForm(FlaskForm):
 
 
 class GetForm(FlaskForm):
-    id = IntegerField('User ID')
+    id = IntegerField('ID')
     submit = SubmitField("Submit")
 
 

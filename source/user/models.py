@@ -14,6 +14,8 @@ class User(BaseModel, UserMixin):
     email = db.Column(db.String(48))
     password = db.Column(db.String(48))
     experience = db.Column(db.String(24))
+    drinks = db.relationship('Item', backref='user', lazy=True)
+    tags = db.Column(db.String())
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
 
     def __init__(self, username, email, password_hash, experience, role_id):
@@ -24,7 +26,15 @@ class User(BaseModel, UserMixin):
         self.role_id = role_id
 
     def __repr__(self):
-        return f"User: {self.username}"
+        return f"{self.username}"
+
+    def all_drinks(self, creator_id):
+        drinks = Item.query.filter_by(creator_id=creator_id).all()
+        return drinks
+
+    def all_creators(self, role_id):
+        creators = User.query.filter_by(role_id=role_id).all()
+        return creators
 
     def check_password(self, login_password):
         return check_password_hash(self.password, login_password)
@@ -66,61 +76,63 @@ class Item(BaseModel):
     name = db.Column(db.String(24))
     ingredients = db.Column(db.String())
     creator = db.Column(db.String())
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, name, ingredients, creator):
+    def __init__(self, name, ingredients, creator, creator_id):
         self.name = name
         self.ingredients = ingredients
         self.creator = creator
+        self.creator_id = creator_id
 
     def __repr__(self):
-        return f'ID: {self.id} Name: {self.name} Creator: {self.creator} Ingredients: {self.ingredients}'
+        return f'{self.name}'
 
 
-class ItemUsers(BaseModel):
+# class ItemUsers(BaseModel):
+#
+#     __tablename__ = 'item_users'
+#
+#     id = db.Column(db.Integer(), primary_key=True)
+#     creator_id = db.Column(db.Integer())
+#     item_id = db.Column(db.Integer())
 
-    __tablename__ = 'item_users'
-
-    id = db.Column(db.Integer(), primary_key=True)
-    creator_id = db.Column(db.Integer())
-    item_id = db.Column(db.Integer())
-
-
-class Creator(BaseModel):
-
-    __tableName__ = 'creator'
-
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(48))
-    email = db.Column(db.String(48))
-    drinks = db.Column(db.String(400))
-
-    def __init__(self, name, email, drinks):
-        self.name = name
-        self.email = email
-        self.drinks = drinks
-
-    def __repr__(self):
-        return f'Name: {self.name} Email: {self.email} Creations: {self.drinks}'
-
-
-class Venue(BaseModel):
-
-    __tableName__ = 'venue'
-
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(48))
-    email = db.Column(db.String(48))
-    location = db.Column(db.String(96))
-    tags = db.Column(db.String(400))
-
-    def __init__(self, name, email, location, tags):
-        self.name = name
-        self.email = email
-        self.location = location
-        self.tags = tags
-
-    def __repr__(self):
-        return f'Name: {self.name} Email: {self.email} Location: {self.location} Tags: {self.tags}'
+#
+# class Creator(BaseModel):
+#
+#     __tableName__ = 'creator'
+#
+#     id = db.Column(db.Integer(), primary_key=True)
+#     name = db.Column(db.String(48))
+#     email = db.Column(db.String(48))
+#     drinks = db.Column(db.String(400))
+#
+#     def __init__(self, name, email, drinks):
+#         self.name = name
+#         self.email = email
+#         self.drinks = drinks
+#
+#     def __repr__(self):
+#         return f'Name: {self.name} Email: {self.email} Creations: {self.drinks}'
+#
+#
+# class Venue(BaseModel):
+#
+#     __tableName__ = 'venue'
+#
+#     id = db.Column(db.Integer(), primary_key=True)
+#     name = db.Column(db.String(48))
+#     email = db.Column(db.String(48))
+#     location = db.Column(db.String(96))
+#     tags = db.Column(db.String(400))
+#
+#     def __init__(self, name, email, location, tags):
+#         self.name = name
+#         self.email = email
+#         self.location = location
+#         self.tags = tags
+#
+#     def __repr__(self):
+#         return f'Name: {self.name} Email: {self.email} Location: {self.location} Tags: {self.tags}'
 
 
 
